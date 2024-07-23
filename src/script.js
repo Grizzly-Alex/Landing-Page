@@ -32,3 +32,22 @@ document.addEventListener('keydown', function (e) {
     closeModalWindow();
   }
 });
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+//*** SCROLL PAGE ***
+btnScrollTo.addEventListener('click', function(e){
+  const section1Position = section1.getBoundingClientRect();
+
+  //old school approach
+  /*window.scrollTo({
+      left: section1Position.left + window.scrollX,
+      top: section1Position.top + window.scrollY,
+      behavior: 'smooth',
+    });*/
+
+  //new approach
+  section1.scrollIntoView({ behavior: 'smooth'});
+
+});
