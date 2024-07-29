@@ -80,7 +80,6 @@ document.querySelector('.nav__links').addEventListener('click', function(e){
 const tabContainer = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const contents = document.querySelectorAll('.operations__content');
-console.log(contents);
 
 tabContainer.addEventListener('click', function(e){
     const clickedButton = e.target.closest('.operations__tab');
@@ -96,6 +95,29 @@ tabContainer.addEventListener('click', function(e){
     .classList.add('operations__content--active');
 });
 
+
+//*** NAV ***
+const nav = document.querySelector('.nav');
+
+const navLinksHoverAnimation = function(e) {
+  if(e.target.classList.contains('nav__link')){
+    const linkOver = e.target;
+    const siblingLinks = linkOver.closest('.nav__links').querySelectorAll('.nav__link');
+    const logo = linkOver.closest('.nav').querySelector('img');
+    const logoText = linkOver.closest('.nav').querySelector('.nav__text');
+
+    siblingLinks.forEach(el => {
+      if(el !== linkOver) el.style.opacity = this;
+    });
+
+    logo.style.opacity = this;
+    logoText.style.opacity = this;
+  }
+}
+
+nav.addEventListener('mouseover', navLinksHoverAnimation.bind(0.4));
+
+nav.addEventListener('mouseout', navLinksHoverAnimation.bind(1));
 
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
