@@ -1,6 +1,6 @@
 'use strict';
 
-//*** MODAL WINDOW ***
+//*** MODAL WINDOW ***//
 const modalWindow = document.querySelector('.modal-window');
 const overlay = document.querySelector('.overlay');
 const btnCloseModalWindow = document.querySelector('.btn--close-modal-window');
@@ -32,7 +32,7 @@ document.addEventListener('keydown', function (e) {
 });
 
 
-//*** SCROLL PAGE ***
+//*** SCROLL PAGE ***//
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
@@ -76,7 +76,7 @@ document.querySelector('.nav__links').addEventListener('click', function(e){
 });
 
 
-//*** INTERACTIVE TAB ***
+//*** INTERACTIVE TAB ***//
 const tabContainer = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const contents = document.querySelectorAll('.operations__content');
@@ -96,7 +96,7 @@ tabContainer.addEventListener('click', function(e){
 });
 
 
-//*** NAV ***
+//*** NAV ***//
 const nav = document.querySelector('.nav');
 
 const navLinksHoverAnimation = function(e) {
@@ -118,6 +118,49 @@ const navLinksHoverAnimation = function(e) {
 nav.addEventListener('mouseover', navLinksHoverAnimation.bind(0.4));
 
 nav.addEventListener('mouseout', navLinksHoverAnimation.bind(1));
+
+
+
+//*** STICKY NAVIGATION ***//
+
+//bad approuch 
+/*
+const section1Coords = section1.getBoundingClientRect();
+
+window.addEventListener('scroll', function(e){
+    console.log(window.scrollY);
+    if(this.window.scrollY > section1Coords.top){
+        nav.classList.add('sticky');
+    }
+    else{
+        nav.classList.remove('sticky');
+    }
+});*/
+
+//good approuch (intersection observer API)
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const observerOptions = {
+    root: null,
+    threshold: 0,
+    rootMargin: `-${navHeight}px`,
+}
+const getStickyNav = function(entries){
+    const entry = entries[0];
+    if(entry.isIntersecting){
+        nav.classList.remove('sticky');
+
+    }else{
+        nav.classList.add('sticky');
+    }
+
+    console.log(entry);
+}
+const observer = new IntersectionObserver(getStickyNav, observerOptions);
+observer.observe(header);
+
+
 
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
