@@ -151,14 +151,37 @@ const getStickyNav = function(entries){
     if(entry.isIntersecting){
         nav.classList.remove('sticky');
 
-    }else{
+    } else {
         nav.classList.add('sticky');
-    }
-
-    console.log(entry);
+    }  
 }
-const observer = new IntersectionObserver(getStickyNav, observerOptions);
-observer.observe(header);
+const headerObserver = new IntersectionObserver(getStickyNav, observerOptions);
+headerObserver.observe(header);
+
+
+//*** SHOW ELEMENTS ON SCROLL ***//
+const allSections = document.querySelectorAll('.section');
+
+const appearanceSection = function(entries, observer){
+  const entry = entries[0];
+
+  if(!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+}
+
+const sectionObserver = new IntersectionObserver(appearanceSection, {
+  root: null,
+  threshold: 0.2,
+})
+
+allSections.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+})
+
+
+
 
 
 
