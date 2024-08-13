@@ -205,6 +205,75 @@ const lazyImagesObserver = new IntersectionObserver(loadImages, {
 lazyImages.forEach(image => lazyImagesObserver.observe(image));
 
 
+//Slider
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+const dotContainer = document.querySelector('.dots');
+
+let currentSlide = 0;
+const slidesNumber = slides.length;
+
+slides.forEach((slide, index) => slide.style.transform = `translateX(${index * 100}%)`);
+
+
+const moveToSlide = function(slide){
+  slides.forEach((s, i) => 
+    s.style.transform = `translateX(${(i - slide) * 100}%)`);
+};
+
+const nextSlide = function(){
+  if(slidesNumber - 1 === currentSlide){
+    currentSlide = 0;
+  }
+  else{
+    currentSlide++;
+  }
+  moveToSlide(currentSlide); 
+  activateCurrentDot(currentSlide);
+};
+
+const previousSlide = function(){
+  if(0 === currentSlide){
+    currentSlide = slidesNumber - 1;
+  }
+  else{
+    currentSlide--;
+  }
+  moveToSlide(currentSlide); 
+  activateCurrentDot(currentSlide);
+};
+
+const createDots = function(){
+  slides.forEach(function(_, index){
+    dotContainer.insertAdjacentHTML('beforeend',`<button class="dots__dot" data-slide="${index}"></button>`);
+  })
+};
+
+const activateCurrentDot = function(slide){
+  document.querySelectorAll('.dots__dot').forEach(dot => dot.classList.remove('dots__dot--active'));
+  document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
+}
+
+createDots();
+activateCurrentDot(currentSlide);
+
+btnRight.addEventListener('click', nextSlide);
+
+btnLeft.addEventListener('click', previousSlide);
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'ArrowRight') nextSlide();
+  if(e.key === 'ArrowLeft') previousSlide();
+});
+
+dotContainer.addEventListener('click', function(e){
+  if(e.target.classList.contains('dots__dot')){
+    currentSlide = e.target.dataset.slide;
+    moveToSlide(currentSlide); 
+    activateCurrentDot(currentSlide);
+  }
+});
 
 
 ///////////////////////////////////////////////////////////////
