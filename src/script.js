@@ -273,34 +273,3 @@ dotContainer.addEventListener('click', function(e){
     activateCurrentDot(currentSlide);
   }
 });
-
-
-///////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////
-/*
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-const getRandomColor = () => 
-  `rgb(${getRandomIntInclusive(0, 255)},
-  ${getRandomIntInclusive(0, 255)},
-  ${getRandomIntInclusive(0, 255)})`;
-
-document.querySelector('.nav__link').addEventListener('click', function(e) {
-  e.preventDefault();
-  this.style.backgroundColor = getRandomColor();
-  e.stopPropagation();
-
-});
-
-document.querySelector('.nav__links').addEventListener('click', function(e) {
-  this.style.backgroundColor = getRandomColor();
-});
-
-document.querySelector('.nav').addEventListener('click', function(e) {
-  this.style.backgroundColor = getRandomColor();
-},true);*/
