@@ -180,8 +180,7 @@ allSections.forEach(section => {
   section.classList.add('section--hidden');
 })
 
-//Lazy loading for img
-
+//LAZY LOADING FOR IMG
 const lazyImages = document.querySelectorAll('img[data-src]');
 
 const loadImages = function(entries, observer){
@@ -205,7 +204,7 @@ const lazyImagesObserver = new IntersectionObserver(loadImages, {
 lazyImages.forEach(image => lazyImagesObserver.observe(image));
 
 
-//Slider
+//SLIDER
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
